@@ -1,6 +1,6 @@
 const mongoose = require("mongoose")
 
-const connection = async () => {
+const connection = async (req, res) => {
     try {
         await mongoose.connect(
             "mongodb+srv://harshitasharmathandla_db_user:68Y6g9AGSKY8UJTa@cluster0.s3btjro.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0"
