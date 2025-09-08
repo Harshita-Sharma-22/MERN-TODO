@@ -7,6 +7,9 @@ const Signup = () => {
     <div className='signup'>
         <div className="container">
             <div className="row">
+                <div className="col-lg-4 column col-left d-flex justify-content-center align-items-center">
+                    <HeadingComp first="Sign" second="Up"/>
+                </div>
                 <div className="col-lg-8 column d-flex justify-content-center align-items-center">
                     <div className='d-flex flex-column w-100 p-5'>
                         <input className='p-2 my-3 input-signup' type="email" placeholder='Enter your Email' />
@@ -14,9 +17,6 @@ const Signup = () => {
                         <input className='p-2 my-3 input-signup' type="password" placeholder='Enter your Pssword' />
                         <button className='btn-signup p-2'>Sign Up</button>
                     </div>
-                </div>
-                <div className="col-lg-4 column col-left d-flex justify-content-center align-items-center">
-                    <HeadingComp first="Sign" second="up"/>
                 </div>
             </div>
         </div>
