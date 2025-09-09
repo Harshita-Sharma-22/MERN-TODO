@@ -2,8 +2,18 @@ import React from 'react'
 import "./Navbar.css"
 import { MdLibraryBooks } from "react-icons/md";
 import { Link } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
+import {authActions} from "../../store"
 
 const Navbar = () => {
+  const isLoggedIn = useSelector((state)=> state.isLoggedIn)
+  const dispatch = useDispatch
+  const logout = ()=>{
+    sessionStorage.clear("id")
+    dispatch(authActions.logout())
+  }
+
   return (
     <div><nav className="navbar navbar-expand-lg">
   <div className="container">
@@ -23,15 +33,21 @@ const Navbar = () => {
           <Link className="nav-link active" aria-current="page" to="/todo">
             <img className='img-fluid user-png' src='frontend/src/components/navbar/login-avatar.png' alt='/'/>Todo</Link>
         </li>
-        <li className="nav-item">
-          <Link className="nav-link active btn-nav mx-2" aria-current="page" to="/signup">Sign Up</Link>
+        {!isLoggedIn && (
+          <>
+            <li className="nav-item">
+              <Link className="nav-link active btn-nav mx-2" aria-current="page" to="/signup">Sign Up</Link>
+            </li>
+            <li className="nav-item">
+              <Link className="nav-link active btn-nav mx-2" aria-current="page" to="/signin">Sign In</Link>
+            </li>
+          </>
+        )}
+        {isLoggedIn && (
+          <li className="nav-item">
+          <Link className="nav-link active btn-nav mx-2" onClick={logout} aria-current="page" to="/">Logout</Link>
         </li>
-        <li className="nav-item">
-          <Link className="nav-link active btn-nav mx-2" aria-current="page" to="/signin">Sign In</Link>
-        </li>
-        <li className="nav-item">
-          <Link className="nav-link active btn-nav mx-2" aria-current="page" to="/">Logout</Link>
-        </li>
+        )}
         </ul>
     </div>
   </div>

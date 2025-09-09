@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import Navbar from './components/navbar/Navbar'
 import Home  from './components/home/Home'
 import About from './components/about/About'
@@ -7,9 +7,20 @@ import Signup from './components/signup/Signup'
 import SignIn from './components/signup/SignIn'
 import Todo from './components/todo/Todo'
 import {BrowserRouter as Router, Routes, Route } from "react-router-dom"
+import { useDispatch } from 'react-redux'
+import {authActions} from "./store"
 
 
 const App = () => {
+  const dispatch = useDispatch()
+  useEffect(()=>{
+    const id = sessionStorage.getItem("id")
+    if(id){
+      dispatch(authActions.login())
+    }
+    },[])
+    
+
   return (
     <div>
       <Router>

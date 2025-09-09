@@ -2,8 +2,11 @@ import React, { useState } from 'react'
 import './Signup.css'
 import HeadingComp from './HeadingComp'
 import axios from "axios"
+import { useNavigate } from 'react-router-dom'
 
 const Signup = () => {
+    const history = useNavigate
+
     const[Inputs, setInputs] = useState({
         email: "",
         username: "",
@@ -16,13 +19,18 @@ const Signup = () => {
 
     const submit = async (e)=>{
         e.preventDefault()
-        await axios.post("http://localhost:1000/api/v1")
-        console.log(Inputs)
-        setInputs({
-        email: "",
-        username: "",
-        password: "",
-    })
+        await axios.post("http://localhost:1000/api/v1/register", Inputs).then((response)=>{
+            if(response.daata.message === "User Already Exists"){
+                alert(response.data.message)
+            } else {
+                setInputs({
+                email: "",
+                username: "",
+                password: "",
+                })
+                history("/signin")
+            }
+        })
     }
   return (
     <div className='signup'>
@@ -36,7 +44,7 @@ const Signup = () => {
                         <input className='p-2 my-3 input-signup' type="email" placeholder='Enter your Email' onChange={change} value={Inputs.email}/>
                         <input className='p-2 my-3 input-signup' type="username" placeholder='Enter your Username' onChange={change} value={Inputs.username}/>
                         <input className='p-2 my-3 input-signup' type="password" placeholder='Enter your Pssword' onChange={change} value={Inputs.password}/>
-                        <button className='btn-signup p-2' onClick={submit}}>Sign Up</button>
+                        <button className='btn-signup p-2' onClick={submit}>Sign Up</button>
                     </div>
                 </div>
             </div>

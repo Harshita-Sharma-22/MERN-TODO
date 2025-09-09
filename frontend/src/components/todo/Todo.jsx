@@ -3,8 +3,11 @@ import './Todo.css'
 import TodoCards from './TodoCards'
 import { ToastContainer, toast } from 'react-toastify';
 import Update from './Update';
+import { useSelector, useDispatch } from 'react-redux';
+import {authActions} from "../../store"
+import axios from "axios"
 
-
+let id = sessionStorage.getItem("id")
 const Todo = () => {
     const[Inputs,setInputs] = useState({title:"", body:""})
     const [Array, setArray] = useState([])
@@ -17,15 +20,21 @@ const Todo = () => {
         const { name, value } = e.target
         setInputs({...Inputs, [name]: value})
     }
-    const submit = () =>{
+    const submit =async() =>{
         if(Inputs.title || Inputs.body === ""){
             toast.error("Title or body should not be empty")
         }else{
-        setArray([...Array, Inputs])
-        console.log(Inputs)
-        setInputs({title:"", body:""})
-        toast.succes("Your task is added")
-        toast.error("Your task is not saved! Please sign up")
+            if(id){
+                await axios.post("http://localhost:1000/api/v2/addTask",Inputs,{title:Inputs.title, body:Inputs.body,id:id})
+                .then((response)=>{
+                    console.log(response)
+                })
+                setArray([...Array, Inputs])
+                console.log(Inputs)
+                setInputs({title:"", body:""})
+                toast.succes("Your task is added")
+                toast.error("Your task is not saved! Please sign up")
+            }
     }
         }
         
