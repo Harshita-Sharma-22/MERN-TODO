@@ -1,8 +1,26 @@
 import React from 'react'
+import { MdDelete, MdDisplaySettings } from 'react-icons/md'
+import {GrDocumentUpdate} from "react-icons/gr"
 
-const TodoCards = () => {
+const TodoCards = ({title, body, id, delid}) => {
   return (
-    <div>TodoCards</div>
+    <div className='p-3 todo-card'>
+        <div>
+            <h5>{title}</h5>
+            <p>{body.substring(0,77)}...</p>
+        </div>
+        <div className='d-flex justify-content-around'>
+            <div className='card-icon-head d-flex justify-content-center align-items-center px-2 py-1' onClick={()=>{
+                MdDisplaySettings("block")
+            }}>
+                <GrDocumentUpdate className="card-icons"/>Update</div>
+            <div className='card-icon-head d-flex justify-content-center align-items-center px-2 py-1 text-danger' onClick={()=>
+                delid(id)
+            }>
+                <MdDelete className="card-icons del"/>Delete
+            </div>
+        </div>
+    </div>
   )
 }
 

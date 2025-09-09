@@ -3,6 +3,9 @@ import './Signup.css'
 import HeadingComp from './HeadingComp'
 
 const Signup = () => {
+    const change =(e)=>{
+        const {name, value} = e.target
+    }
   return (
     <div className='signup'>
         <div className="container">
@@ -12,9 +15,9 @@ const Signup = () => {
                 </div>
                 <div className="col-lg-8 column d-flex justify-content-center align-items-center">
                     <div className='d-flex flex-column w-100 p-5'>
-                        <input className='p-2 my-3 input-signup' type="email" placeholder='Enter your Email' />
-                        <input className='p-2 my-3 input-signup' type="username" placeholder='Enter your Username' />
-                        <input className='p-2 my-3 input-signup' type="password" placeholder='Enter your Pssword' />
+                        <input className='p-2 my-3 input-signup' type="email" placeholder='Enter your Email' onChange={change}/>
+                        <input className='p-2 my-3 input-signup' type="username" placeholder='Enter your Username' onChange={change}/>
+                        <input className='p-2 my-3 input-signup' type="password" placeholder='Enter your Pssword' onChange={change}/>
                         <button className='btn-signup p-2'>Sign Up</button>
                     </div>
                 </div>
